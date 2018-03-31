@@ -9,7 +9,8 @@ We will...
 
 NOTE: I don't recommend cloning this repo. 
 Start an empty repo for your project and copy/paste what you need 
-piece-by-piece so you know what's going on.  
+piece-by-piece so you know what's going on.
+When creating a repo don't create a README.md or .gitignore. Angular is going to create these for you.
 
 ## Step 1 - Sign up / sign in to the AWS Console 
 
@@ -32,7 +33,7 @@ From here on out we'll rely on the SDK as much as possible.
 We'll spend most of our time interacting with the CloudFormation service through the SDK.
 CloudFormation allows us to set up, update, and tear down an entire application stack with ease.
 
-```python
+```
 pip install boto3
 ```
 
@@ -40,7 +41,7 @@ Reference: [AWS SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python/)
 
 The AWS Command Line Interface (CLI) is handy to have installed too.
 
-```python
+```
 pip install awscli
 ```
 
@@ -54,10 +55,9 @@ You've installed the SDK, but before you can use it you'll need to setup program
 
 In short, in the AWS Console, navigate to the 'IAM' service. Select 'Users' on the left.
 Select 'Add user' button. Set 'User name' to 'devops' and 'Access type' to 'Programmatic access'. Click next.
-Select 'Create group' button. Set 'Group name' to 'admin' and check the 'AdministratorAccess' policy. Click 'Create group'. 
+Select 'Create group' button. Set 'Group name' to 'admin' and check the 'AdministratorAccess' policy. 
+NOTE: In practice only give users access to the policies they need. Click 'Create group'. 
 Make sure checkbox next to newly created group is selected and click next. Click 'Create user'. 
-
-NOTE: In practice only give users access to the policies they need.
 
 STAY ON THIS PAGE
 
@@ -73,3 +73,51 @@ aws configure
 DO save your 'Access key ID' and 'Secret access key' somewhere safe.
 
 DO NOT commit them. They can be used to create resources that incur charges on your account.
+
+## Step 5 - Build a basic web app using Angular Framework
+
+Before we continue provisioning our infrastructure, let's build a basic Angular web app so we have something to launch.
+
+First, install the [Angular CLI](https://cli.angular.io/):
+
+```
+npm install -g @angular/cli
+```
+
+NOTE: [Node.js](https://nodejs.org/en/) must be installed on your system to use node package manager (npm).
+
+Once installed, from within your empty repo, tell the Angular CLI to create a new app.
+
+```
+ng new your-app-name
+```
+
+This may take a bit as Angular installs all of the Node.js modules it relies upon in 'your-app-name/node_modules'.
+
+Once installed, I recommend moving everything in the newly created 'your-app-name' folder up a level and deleting the 'your-app-name' folder. 
+I like my project structures like I like my management structures - flat. 
+
+Now, from within your repo folder, you should be able to run your app on a local dev server that will automatically reload if you make any changes to source files.
+
+```
+ng serve
+```
+
+Once compiled, you can view your app at [http://localhost:8080/](http://localhost:8080/).
+NOTE: You can specify the host and port 'ng serve' uses as follows 'ng serve --host localhost --port 8080'.
+
+Shut down the dev server by pressing 'ctrl+c'.
+
+Now, from within your repo folder, build a production version of your app in the 'dist' folder. This may take a sec.
+
+```
+ng build -prod
+```
+
+Once built, the contents of this folder represent our app front-end that we'll upload to an AWS S3 bucket and serve to the world using AWS CloudFront.
+
+## Step 5 - Provision web tier infrastructure
+
+## Step 6 - Provision server tier infrastructure
+
+
