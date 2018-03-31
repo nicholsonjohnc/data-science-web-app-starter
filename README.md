@@ -92,7 +92,7 @@ Once installed, from within your empty repo, tell the Angular CLI to create a ne
 ng new your-app-name
 ```
 
-This may take a bit as Angular installs all of the Node.js modules it relies upon in 'your-app-name/node_modules'.
+This may take a bit as Angular installs all of the Node.js modules it depends on in 'your-app-name/node_modules'.
 
 Once installed, I recommend moving everything in the newly created 'your-app-name' folder up a level and deleting the 'your-app-name' folder. 
 I like my project structures like I like my management structures - flat. 
@@ -116,8 +116,39 @@ ng build -prod
 
 Once built, the contents of this folder represent our app front-end that we'll upload to an AWS S3 bucket and serve to the world using AWS CloudFront.
 
-## Step 5 - Provision web tier infrastructure
+## Step 6 - Provision web tier (front-end) infrastructure
 
-## Step 6 - Provision server tier infrastructure
+From within your repo folder, make directory 'cloudformation'.
+
+```
+mkdir cloudformation
+```
+
+Inside of directory 'cloudformation', make 'web-tier-stack.json' and 'web_tier_stack.py'.
+
+```
+touch cloudformation/web-tier-stack.json
+touch cloudformation/web_tier_stack.py
+```
+
+[CloudFormation](https://aws.amazon.com/cloudformation/) expects a JSON template describing 
+all of the infrastructure resources we want it to create, update, or delete.
+
+We will describe any web tier infrastructure resources we want CloudFormation to manage in 'web-tier-stack.json'.
+Then we'll write a Python script, 'web_tier_stack.py', to programatically create, update, or delete the stack described in 'web-tier-stack.json'. 
+
+The template in 'web-tier-stack.json' consists of Parameters and Resources. 
+Parameters are what make our template general purpose. 
+For instance, 'web-tier-stack.json' takes a DomainName parameter that is used throughout 
+our template to create appropriately named resources.
+
+I recommend creating infrastructure resources by copy/pasting from the [AWS Resource Types Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
+
+The resources being created in 'web-tier-stack.json' are as follows:
+* WebBucket - The S3 bucket where your code will live. Name matches your domain name.   
+* WebBucketPolicy - The policy for WebBucket that gives public read access to its contents.
+* WebBucketWWW - An S3 bucket that simply redirects requests for the www subdomain to your domain.
+
+## Step 7 - Provision server tier infrastructure
 
 
