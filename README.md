@@ -17,4 +17,18 @@ NOTE: You can purchase a domain name elsewhere, but I generally prefer to do as 
 Their prices are competitive and consistent. Performance is unmatched. No gotchas. 
 Also, development is easier having everything in one place.
 
-## Step 3 - Register a domain name using Route 53
+## Step 3 - Install the AWS SDK for Python (Boto3)
+
+As you just experienced when purchasing a domain, 
+reading documentation and clicking around the console is slow and error prone.
+A much better way is to interact with AWS programmatically.
+The AWS SDK for Python allows us to do this.
+From here on out we'll rely on the SDK as much as possible.
+We'll spend most of our time interacting with the CloudFormation service through the SDK.
+CloudFormation allows us to set up, update, and tear down an entire application stack with ease.
+
+```python
+pip install boto3
+```
+
+Reference: [AWS SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python/)
