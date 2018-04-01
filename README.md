@@ -5,7 +5,7 @@ We will...
 
 * Automate provisioning of your app's infrastructure using AWS CloudFormation (Python).
 * Build out a front-end using Angular Framework (TypeScript).
-* Build a simple/low-cost back-end using AWS Lambda (Python).  
+* Build a highly-scalable yet low-cost back-end using AWS Lambda (Python).  
 
 NOTE: I don't recommend cloning this repo. 
 Start an empty repo for your project and copy/paste what you need 
@@ -144,7 +144,7 @@ our template to create appropriately named resources.
 
 I recommend creating infrastructure resources by copy/pasting from the [AWS Resource Types Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
 
-The resources being created in 'web-tier-stack.json' are as follows:
+The resources being described in 'web-tier-stack.json' are as follows:
 * WebBucket - The S3 bucket where your code will live. Name matches your domain name.   
 * WebBucketPolicy - The policy for WebBucket that gives public read access to its contents.
 * WebBucketWWW - An S3 bucket that simply redirects requests for the www subdomain to your domain.
